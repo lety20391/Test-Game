@@ -2,6 +2,7 @@
 <head>
     <!-- aframe itself -->
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script> window.webvrpolyfill.polyfillDisplays[0].deviceInfo_.viewer.interLensDistance = 0.050; </script>
     <!-- physics and other extras -->
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
     <!-- alternate random number generator -->
@@ -9,7 +10,7 @@
     <!-- utility functions -->
     <script>
         window.alert("test s8");
-        window.webvrpolyfill.polyfillDisplays[0].deviceInfo_.viewer.interLensDistance = 0.045;
+        
         $ = (sel) => document.querySelector(sel)
         $$ = (sel) => document.querySelectorAll(sel)
         on = (elem, type, hand) => elem.addEventListener(type,hand)
@@ -29,6 +30,7 @@
                 radius: {type:'number'}
             },
             init: function() {
+                
                 const rg = new Random(Random.engines.mt19937().seed(10))
                 const center = new THREE.Vector3(this.data.centerOffset.x, this.data.centerOffset.y, this.data.centerOffset.z)
                 const jx = this.data.jitter.x
