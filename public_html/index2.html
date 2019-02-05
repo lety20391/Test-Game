@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Html Game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- A-Frame -->
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+        
+        <!-- physics and other extras -->
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+        
+        <script>
+            window.webvrpolyfill.polyfillDisplays[0].deviceInfo_.viewer.interLensDistance = 0.045;
+            $ = (sel) => document.querySelector(sel)
+            $$ = (sel) => document.querySelectorAll(sel)
+            on = (elem, type, hand) => elem.addEventListener(type,hand)
+        </script>
+        
+    </head>
+    <body>
+        <a-scene stats physics="debug:true;" sound="src:url(./audio/octobernight2.mp3); loop:true; autoplay:true; volume:0.5;">
+            <a-assets>
+                <a-asset-item id="imp" src="models/imp/scene.gltf"></a-asset-item>
+                <a-asset-item id="staff" src="models/staff/scene.gltf"></a-asset-item>
+                <a-asset-item id="tree1" src="models/arbol1/scene.gltf"></a-asset-item>
+                <a-asset-item id="tree2" src="models/arbol2/scene.gltf"></a-asset-item>
+                <a-asset-item id="moon" src="models/moon/scene.gltf"></a-asset-item>
+                <a-asset-item id="cauldron" src="models/cauldron/scene.gltf"></a-asset-item>
+                <a-asset-item id="rock1" src="models/rock1/scene.gltf"></a-asset-item>
+            </a-assets>
+            <a-entity camera look-controls position="0 1.5 0">
+                <a-cursor></a-cursor>
+                <a-text id="score" value="Score" position="-0.2 -0.5 -1" color="black" width="5" anchor="left"></a-text>
+                <a-entity position="0 0 -3" id="weapon">
+                    <a-entity position="2.3 -2.7 -16.3" gltf-model="#staff" static-body>
+                    </a-entity>
+                </a-entity>
+                
+            </a-entity>
+            
+            <a-entity id='ball' position="0 1 -4"  dynamic-body >   
+                <a-entity id='imp-model' gltf-model="#imp" position="0 -0.4 0"></a-entity>
+                <a-sphere id="egg-model" radius="0.25" segments-height="8" segments-width="8" scale="1 0.6 0.8" material="color:purple; flatShading:true; emissive:red; emissiveIntensity:0.2"></a-sphere>
+            </a-entity>
+            
+            <!-- cauldron -->
+            <a-entity  position="1.5 0 -3.5" gltf-model="#cauldron" animation-mixer></a-entity>
+            <!-- the moon -->
+            <a-entity gltf-model="#moon"></a-entity>
+
+            <!-- trees -->
+            <a-entity gltf-model="#tree2" position="38 8.5 -10"></a-entity>
+            <a-entity gltf-model="#tree1" position="33 5.5 -10"></a-entity>
+            <a-entity gltf-model="#tree1" position="33 5.5 -30"></a-entity>
+            
+            <!-- ground plane -->
+            
+            <a-plane color='#52430e' rotation="-90 0 0"  width="100" height="100" static-body shadow="receive:true">
+            </a-plane>
+            
+            <!-- background sky -->
+            <a-sky color="#270d2c"></a-sky>
+            
+            <!-- directional light ~ moon light -->
+            <a-entity light="type:directional; color: #ffffff; intensity: 0.5; castShadow:true" position="31 80 -50"></a-entity>
+            
+            <!-- hemisphere light going from white to dark blue -->
+            <a-entity light="type: hemisphere; color:white; groundColor: #5424ff; intensity: 0.4"></a-entity>
+            
+            <!-- Fire light ~ warm light  -->
+            <a-entity light="type:point; intensity:1.6; distance: 5; decay: 2; color:red" position="0.275 -0.32 -3.77" ></a-entity>
+            
+            
+        </a-scene>
+    <script>
+            let score = 0;
+            let hit = false
+            let resetId = 0
+            const resetBall = () => {
+                clearTimeout(resetId)
+                $("#ball").body.position.set(0, 0.6,-4)
+                $("#ball").body.velocity.set(0, 5,0)
+                $("#ball").body.angularVelocity.set(0, 0,0)
+                showImp = (Math.floor(Math.random()*4) !== 0)
+                $("#imp-model").setAttribute('visible', showImp);
+                $("#egg-model").setAttribute('visible', !showImp)
+                hit = false
+                resetId = setTimeout(resetBall,6000)
+            }
+
+            on($("#weapon"),'collide',(e)=>{
+                const ball = $("#ball")
+                if(e.detail.body.id === ball.body.id && !hit) {
+                    hit = true
+                    if(showImp){
+                        //$("#imp-model").components.sound.playSound()
+                        score = score + 1
+                    }else{
+                        //$("#egg-model").components.sound.playSound();
+                        score= score - 10
+                    }
+                    
+                    $("#score").setAttribute('text','value','Score '+score)
+                    clearTimeout(resetId)
+                    resetId = setTimeout(resetBall,2000)
+                }
+            })
+
+            setTimeout(resetBall,3000)
+    </script>
+    </body>
+</html>
