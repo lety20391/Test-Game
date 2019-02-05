@@ -1,15 +1,15 @@
 <html>
 <head>
     <!-- aframe itself -->
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script> window.webvrpolyfill.polyfillDisplays[0].deviceInfo_.viewer.interLensDistance = 0.050; </script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@8d4b8c83dadc1966e20b0de2008b50679ef79504/dist/aframe-master.min.js"></script>
+    
     <!-- physics and other extras -->
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
     <!-- alternate random number generator -->
     <script src="js/random.js"></script>
     <!-- utility functions -->
     <script>
-        window.alert("test s8");
+        window.alert("test s8 master build aframe");
         
         $ = (sel) => document.querySelector(sel)
         $$ = (sel) => document.querySelectorAll(sel)
@@ -53,6 +53,9 @@
                 }
             }
         })
+    </script>
+    <script> 
+        window.webvrpolyfill.polyfillDisplays[0].deviceInfo_.viewer.interLensDistance = 0.050; 
     </script>
 </head>
 <body>
