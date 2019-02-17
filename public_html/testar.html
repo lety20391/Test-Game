@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    </head>
+    <body>
+        <a-scene embedded artoolkit="sourceType:webcam;">
+        <a-assets>
+            <a-asset-item id="xray" src="model/model2.gltf"></a-asset-item>
+            
+        </a-assets>
+        <!--
+        <a-box position="0 0.5 0" material="opacity:0.5;"></a-box>
+        -->
+        
+        <a-entity  gltf-model="#xray" position="0 0.5 0"
+        ></a-entity>
+        <a-marker-camera preset="hiro"></a-marker-camera>
+    </a-scene>
+    </body>
+</html>
