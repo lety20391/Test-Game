@@ -16,16 +16,14 @@ and open the template in the editor.
     <body style='margin : 0px; overflow: hidden;'>
         <a-scene embedded arjs='sourceType: webcam;'>
 
-          <a-marker preset='hiro'>
+          <a-marker-camera preset='hiro'>
             <!--Adding a glTF 2.0 model to your scene-->
             <a-entity
             gltf-model-next="src: url(/models/model2.gltf);"
             >
             </a-entity>
 
-          </a-marker>
-
-          <a-entity camera></a-entity>
+          </a-marker-camera>
         </a-scene>
       </body>
 </html>
