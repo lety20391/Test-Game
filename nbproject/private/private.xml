@@ -5,6 +5,10 @@
         <group name="Java SE">
             <file>file:/C:/Users/Dat%20ThinkPad/Desktop/Aptech/whack-an-imp-master/New%20Folder/Test%20Game/public_html/step7.html</file>
         </group>
-        <group name="Demo"/>
+        <group name="Demo">
+            <file>file:/C:/Users/Dat%20ThinkPad/Desktop/Aptech/whack-an-imp-master/New%20Folder/Test%20Game/public_html/index.html</file>
+            <file>file:/C:/Users/Dat%20ThinkPad/Desktop/Aptech/whack-an-imp-master/New%20Folder/Test%20Game/public_html/testar.html</file>
+            <file>file:/C:/Users/Dat%20ThinkPad/Desktop/Aptech/whack-an-imp-master/New%20Folder/Test%20Game/public_html/step7.html</file>
+        </group>
     </open-files>
 </project-private>
